@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     StyleSheet,
@@ -6,9 +6,12 @@ import {
     Text,
     ActivityIndicator,
     Image,
+    Button,
 } from "react-native";
+import FunctionalComponent from "./components/FunctionComponent";
 
 export default function App() {
+    const [count, setCount] = useState(0);
     return (
         <ScrollView>
             <Text style={styles.text}>
@@ -26,6 +29,8 @@ export default function App() {
                 }}
                 style={styles.image}
             />
+            <FunctionalComponent name="John" defaultTimerValue={-10} />
+            <FunctionalComponent name="Jane" />
         </ScrollView>
     );
 }
