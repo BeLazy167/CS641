@@ -9,16 +9,23 @@ import {
     Button,
 } from "react-native";
 import FunctionalComponent from "./components/FunctionComponent";
+import customStyles from "./style/cutom";
+const styles = StyleSheet.create({
+    image: {
+        width: 50,
+        height: 50,
+    },
+});
 
 export default function App() {
     const [count, setCount] = useState(0);
     return (
-        <ScrollView>
-            <Text style={styles.text}>
+        <ScrollView style={customStyles.container}>
+            <Text style={customStyles.text}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                 in dui mauris.
             </Text>
-            <Text style={styles.text}>
+            <Text style={customStyles.text}>
                 Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor
                 neque eu tellus rhoncus ut eleifend nibh porttitor.
             </Text>
@@ -34,16 +41,3 @@ export default function App() {
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        color: "#333",
-        marginBottom: 20,
-        textAlign: "center",
-    },
-    image: {
-        width: 50,
-        height: 50,
-    },
-});
