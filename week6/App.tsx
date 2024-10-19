@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
         flexGrow: 1,
-        justifyContent: 'center',
+        justifyContent: "center",
     },
     content: {
         alignItems: "center",
@@ -153,15 +153,15 @@ const styles = StyleSheet.create({
         textShadowRadius: 10,
     },
     viewScoresButton: {
-        backgroundColor: '#3498db',
+        backgroundColor: "#3498db",
         padding: 10,
         borderRadius: 5,
         marginTop: 20,
     },
     viewScoresButtonText: {
-        color: 'white',
+        color: "white",
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
 });
 

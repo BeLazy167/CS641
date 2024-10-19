@@ -36,22 +36,24 @@ const ScoreModal: React.FC<ScoreModalProps> = ({
             onRequestClose={onClose}
         >
             <View style={styles.centeredView}>
-                <ImageBackground
-                    source={require("../assets/modal-background.jpg")}
-                    style={styles.modalView}
-                    imageStyle={styles.backgroundImage}
-                >
-                    <Text style={styles.modalTitle}>All Scores</Text>
-                    <FlatList
-                        data={scores}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        style={styles.flatList}
-                    />
+                <View style={styles.modalView}>
+                    <ImageBackground
+                        source={require("../assets/modal-background.jpg")}
+                        style={styles.backgroundImage}
+                        resizeMode="contain"
+                    >
+                        <Text style={styles.modalTitle}>All Scores</Text>
+                        <FlatList
+                            data={scores}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={styles.flatList}
+                        />
+                    </ImageBackground>
                     <Pressable style={styles.closeButton} onPress={onClose}>
                         <Text style={styles.closeButtonText}>Close</Text>
                     </Pressable>
-                </ImageBackground>
+                </View>
             </View>
         </Modal>
     );
@@ -65,10 +67,11 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modalView: {
+        backgroundColor: "white",
         width: "80%",
-        maxHeight: "80%",
+        maxHeight: "70%",
         borderRadius: 20,
-        padding: 35,
+        padding: 15,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -80,30 +83,33 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     backgroundImage: {
-        borderRadius: 20,
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        paddingTop: 20,
     },
     modalTitle: {
-        fontSize: 24,
-        fontWeight: "bold",
+        fontSize: 22,
+        fontWeight: "600",
+        color: "#000",
         marginBottom: 15,
-        color: "#fff",
     },
     flatList: {
         width: "100%",
+        paddingHorizontal: 10,
     },
     scoreItem: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: "rgba(255, 255, 255, 0.3)",
-        backgroundColor: "rgba(255, 255, 255, 0.7)",
-        marginVertical: 5,
-        borderRadius: 5,
+        paddingVertical: 8,
+        paddingHorizontal: 15,
+        marginVertical: 2,
     },
     scoreText: {
         fontSize: 18,
+        fontWeight: "500",
+        color: "#000",
     },
     dateText: {
         fontSize: 14,
@@ -112,14 +118,14 @@ const styles = StyleSheet.create({
     closeButton: {
         backgroundColor: "#2196F3",
         borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-        marginTop: 15,
+        paddingVertical: 8,
+        paddingHorizontal: 20,
+        marginTop: 10,
     },
     closeButtonText: {
         color: "white",
-        fontWeight: "bold",
-        textAlign: "center",
+        fontSize: 16,
+        fontWeight: "500",
     },
 });
 
