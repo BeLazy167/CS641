@@ -1,10 +1,12 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Stack = createNativeStackNavigator();
-
-function Home({ navigation }: { navigation: any }) {
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+function HomeContent({ navigation }: { navigation: any }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome Home</Text>
@@ -64,6 +66,30 @@ function Profile({ navigation }: { navigation: any }) {
     );
 }
 
+function NotificationsScreen({ navigation }: { navigation: any }) {
+    return (
+        <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+            <Button onPress={() => navigation.goBack()} title="Go back home" />
+        </View>
+    );
+}
+
+function DrawerNavigator() {
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen
+                name="Notifications"
+                component={NotificationsScreen}
+            />
+            <Drawer.Screen name="Home" component={HomeContent} />
+            <Drawer.Screen name="settings" component={Settings} />
+            <Drawer.Screen name="profile" component={Profile} />
+        </Drawer.Navigator>
+    );
+}
+
 export default function App() {
     return (
         <NavigationContainer>
@@ -80,9 +106,10 @@ export default function App() {
             >
                 <Stack.Screen
                     name="home"
-                    component={Home}
+                    component={DrawerNavigator}
                     options={{ title: "My Home" }}
                 />
+
                 <Stack.Screen
                     name="settings"
                     component={Settings}
