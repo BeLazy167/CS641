@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginTop: 20,
-    },
+    }, 
     viewScoresButtonText: {
         color: "white",
         fontSize: 16,
