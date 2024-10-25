@@ -3,9 +3,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();
+const TopTabs = createMaterialTopTabNavigator();
+
 function HomeContent({ navigation }: { navigation: any }) {
     return (
         <View style={styles.container}>
@@ -78,49 +83,129 @@ function NotificationsScreen({ navigation }: { navigation: any }) {
 
 function DrawerNavigator() {
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator
+            screenOptions={{
+                drawerActiveBackgroundColor: "#f4511e",
+                drawerActiveTintColor: "#fff",
+                drawerInactiveTintColor: "#333",
+                drawerLabelStyle: {
+                    marginLeft: -20,
+                    fontSize: 16,
+                },
+            }}
+        >
+            <Drawer.Screen
+                name="Home"
+                component={HomeContent}
+                options={{
+                    drawerIcon: ({ color }) => (
+                        <Ionicons name="home-outline" size={22} color={color} />
+                    ),
+                }}
+            />
             <Drawer.Screen
                 name="Notifications"
                 component={NotificationsScreen}
+                options={{
+                    drawerIcon: ({ color }) => (
+                        <Ionicons
+                            name="notifications-outline"
+                            size={22}
+                            color={color}
+                        />
+                    ),
+                }}
             />
-            <Drawer.Screen name="Home" component={HomeContent} />
-            <Drawer.Screen name="settings" component={Settings} />
-            <Drawer.Screen name="profile" component={Profile} />
         </Drawer.Navigator>
+    );
+}
+
+function TopTabNavigator() {
+    return (
+        <TopTabs.Navigator
+            screenOptions={{
+                tabBarActiveTintColor: "#f4511e",
+                tabBarInactiveTintColor: "gray",
+                tabBarShowIcon: true,
+                tabBarIndicatorStyle: {
+                    backgroundColor: "#f4511e",
+                },
+                tabBarStyle: {
+                    backgroundColor: "#fff",
+                    elevation: 0,
+                    shadowOpacity: 0,
+                },
+                tabBarLabelStyle: {
+                    textTransform: "none",
+                    fontWeight: "bold",
+                },
+            }}
+        >
+            <TopTabs.Screen
+                name="HomeStack"
+                component={DrawerNavigator}
+                options={{
+                    title: "Home",
+                    tabBarIcon: ({ color }) => (
+                        <Ionicons name="home-outline" size={20} color={color} />
+                    ),
+                }}
+            />
+            <TopTabs.Screen
+                name="settings"
+                component={Settings}
+                options={{
+                    title: "Settings",
+                    tabBarIcon: ({ color }) => (
+                        <Ionicons
+                            name="settings-outline"
+                            size={20}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <TopTabs.Screen
+                name="profile"
+                component={Profile}
+                options={{
+                    title: "Profile",
+                    tabBarIcon: ({ color }) => (
+                        <Ionicons
+                            name="person-outline"
+                            size={20}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+        </TopTabs.Navigator>
     );
 }
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    headerStyle: {
+            <View style={{ flex: 1 }}>
+                <View
+                    style={{
                         backgroundColor: "#f4511e",
-                    },
-                    headerTintColor: "#fff",
-                    headerTitleStyle: {
-                        fontWeight: "bold",
-                    },
-                }}
-            >
-                <Stack.Screen
-                    name="home"
-                    component={DrawerNavigator}
-                    options={{ title: "My Home" }}
-                />
-
-                <Stack.Screen
-                    name="settings"
-                    component={Settings}
-                    options={{ title: "My Settings" }}
-                />
-                <Stack.Screen
-                    name="profile"
-                    component={Profile}
-                    options={{ title: "My Profile" }}
-                />
-            </Stack.Navigator>
+                        padding: 15,
+                        paddingTop: 45,
+                    }}
+                >
+                    <Text
+                        style={{
+                            color: "white",
+                            fontSize: 20,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        My App
+                    </Text>
+                </View>
+                <TopTabNavigator />
+            </View>
         </NavigationContainer>
     );
 }
